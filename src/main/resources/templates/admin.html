@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--<html lang="en">-->
+<head>
+    <meta charset="UTF-8">
+    <title>Users list</title>
+</head>
+<body>
+<h1>Admin page</h1>
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Почтовый ящик</th>
+        </tr>
+
+        <tr th:each="user : ${usersList}">
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getName()}">Имя</td>
+            <td th:text="${user.getLastName()}">Фамилия</td>
+            <td th:text="${user.getEmail()}">Почтовый ящик</td>
+            <td>
+                <form th:action="@{/admin/update/{id}(id=${user.id})}" th:object="${user}">
+                    <button type="submit">Изменить</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/admin/delete/{id}(id=${user.id})}" th:object="${user}">
+                    <input type="hidden" name="id" th:value="${user.id}">
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form th:action="@{/admin/addUser}">
+        <button type="submit">Добавить нового пользователя</button>
+    </form>
+</div>
+<!--<div th:each="user : ${usersList}">-->
+<!--    <a th:href="@{/admin/{id}(id=${user.getId()})}" th:text="${user.getUsername()}">user</a>-->
+<!--</div>-->
+<!--<h3>Add a new user</h3>-->
+<!--<div>-->
+<!--    <form th:method="POST" th:action="@{/admin}" th:object="${user}">-->
+<!--        &lt;!&ndash;        <input type="hidden" th:field="*{id}" id="id"/>&ndash;&gt;-->
+<!--        <fieldset>-->
+<!--            <legend>Данные пользователя</legend>-->
+<!--            <p>-->
+<!--                <label th:for="name">Имя</label>-->
+<!--                <input type="text" name="name" th:id="name" th:value="${user.getName()}">-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                <label th:for="lastName">Фамилия</label>-->
+<!--                <input type="text" name="lastName" th:id="lastName" th:value="${user.getLastName()}"><br/>-->
+
+<!--            </p>-->
+<!--            <p>-->
+<!--                <label th:for="email">Почтовый ящик</label>-->
+<!--                <input type="text" name="email" th:id="email" th:value="${user.getEmail()}"><br/>-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                <label th:for="username">Username</label>-->
+<!--                <input type="text" name="username" th:id="username" th:value="${user.getUsername()}"><br/>-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                <label th:for="password">Пароль</label>-->
+<!--                <input type="text" name="password" th:id="password" th:value="${user.getPassword()}"><br/>-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                <label th:for="roles">Роль</label>-->
+<!--                <th:block th:each="role: ${roles}">-->
+<!--                    <input type="checkbox" th:field="*{roles}"-->
+<!--                           th:text="${role.getName()}" th:value="${role.getId()}" class="m-2" />-->
+<!--                </th:block>-->
+<!--            </p>-->
+<!--        </fieldset>-->
+
+<!--        <input type="submit" value="Add user"/>-->
+<!--    </form>-->
+<!--</div>-->
+<a th:href="@{/logout}">Logout here</a>
+</body>
+</html>

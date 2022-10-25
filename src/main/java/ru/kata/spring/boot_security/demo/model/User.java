@@ -44,6 +44,10 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    public void addRole(Role role) {
+        this.roles.add(role);
+    }
+
     public String getEmail() {
         return email;
     }
@@ -76,6 +80,10 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
@@ -87,7 +95,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return getUserName();
     }
 
     @Override
